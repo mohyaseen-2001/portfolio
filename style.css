@@ -1,0 +1,336 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #24213d;
+}
+
+.animated-background {
+    background: linear-gradient(
+        120deg,
+        #ffffff,
+        #d8b4fe,
+        #9333ea,
+        #f3e8ff
+    );
+    background-size: 400% 400%;
+    animation: backgroundMove 6s ease infinite;
+}
+
+@keyframes backgroundMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Navbar */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar{
+    padding: 15px 25px;
+    background-color: #4c1d95;
+    transition: background-color 0.3s ease;
+   
+}
+
+
+.navbar:hover {
+    background-color: #5b21b6;
+}
+
+.navbar .nav-link {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+    color: #e9d5ff ;
+    transform: translateY(-2px);
+}
+
+/* Home section */
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    padding: 60px 20px;
+}
+
+.home-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 20px;
+}
+
+.home-content h1 {
+    font-size: 52px;
+}
+
+.home-content p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #5d5875;
+}
+
+.home-content button {
+    width: 170px;
+    height: 50px;
+    border: none;
+    border-radius: 20px;
+    background-color: #7e22ce;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(126, 34, 206, 0.35);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.home-content button:hover {
+    background-color: #581c87;
+    transform: translateY(-5px);
+}
+
+.home-image {
+    perspective: 1000px;
+}
+
+.home-picture {
+    width: 300px;
+    margin-top: 40px;
+    margin-left: 120px;
+    animation: mohammad 4s ease-in-out infinite;
+}
+
+@keyframes mohammad {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    50% {
+        transform: rotateY(180deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+/* Skills section */
+.skills {
+    padding: 60px 20px;
+}
+
+.skills h2 {
+    margin-bottom: 30px;
+    text-align: center;
+    color: #4c1d95;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding: 20px;
+}
+
+/* Skill cards */
+.skill-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    min-height: 150px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 15px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(126, 34, 206, 0.2);
+    transition: transform 0.7s ease, background-color 0.7s ease,
+        box-shadow 0.7s ease;
+}
+
+.skill-card h3 {
+    margin: 0;
+    color: #581c87;
+}
+
+.skill-card p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #3f3659;
+}
+
+.skill-card:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 12px 22px rgba(126, 34, 206, 0.35);
+    transform: translateY(-8px);
+}
+
+/* Projects section */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 20px;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 320px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #4c1d95;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(76, 29, 149, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    box-shadow: 0 12px 22px rgba(76, 29, 149, 0.35);
+    transform: translateY(-8px);
+}
+
+.project-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border: 1px solid #4c1d95;
+    border-radius: 10px;
+}
+
+.project-link {
+    padding: 15px 25px;
+    color: #581c87;
+    text-decoration: none;
+    border: 1px solid #581c87;
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+
+.project-link:hover {
+    background-color: #581c87;
+    color: #5b21b6;
+}
+.projects h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #4c1d95;
+}
+.contact {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.contact h2 {
+    margin-bottom: 15px;
+    color: #4c1d95;
+}
+
+.contact-links {
+        margin-right: 70px;
+
+    display: flex;
+    justify-content:  space-evenly;
+    align-items: baseline;
+    gap: 100px;
+    padding: 20px;
+}
+
+.contact-links a {
+    color: #581c87;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.contact-links a:hover {
+    color: #9333ea;
+    transform: translateY(-3px);
+}
+
+/* Contact form */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+width: 500px;
+    margin: 30px auto 0;
+    text-align: left;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 12px;
+    font: inherit;
+    border: 1px solid #581c87;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+
+
+.contact-form button {
+    padding: 12px;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #7e22ce;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #581c87;
+    transform: translateY(-3px);
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #4c1d95;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+footer:hover {
+    background-color: #5b21b6;
+}
+@media (max-width: 768px) {
+        .home {
+        flex-direction: column;
+    }
+    .navbar-nav {
+    flex-direction: column;
+    align-items: center;
+        position: static;
+
+}
+.projects-grid {
+    grid-template-columns: 1fr;
+}
+.skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+}
