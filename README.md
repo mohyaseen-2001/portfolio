@@ -34,4 +34,11 @@ portfolio/
 │── index.html
 │── style.css
 │── README.md
-└── image/
+│── image/
+└── design/
+    └── README.md
+```
+
+## Design Mockups
+
+The low-fidelity and high-fidelity desktop mockups are documented in [design/README.md](design/README.md). The editable source is available in [Figma](https://www.figma.com/design/seUJlwvNrO7Wkxkko4kM3L/Mohammed-Yaseen-Portfolio-%E2%80%94-Low---High-Fidelity?node-id=0-1).

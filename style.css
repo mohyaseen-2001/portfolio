@@ -4,9 +4,6 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
 
 body {
     font-family: Arial, sans-serif;
@@ -15,14 +12,6 @@ body {
 
 .animated-background {
     background-color: aliceblue;
-}
-
-.home,
-.about,
-.skills,
-.projects,
-.contact {
-    scroll-margin-top: 100px;
 }
 
 /* Navbar */
@@ -38,10 +27,6 @@ background-color: #312E81;
   transition: background-color 0.3s ease;
 }
 
-.navbar-brand{
-
-    color: whitesmoke;
-}
 .navbar:hover {
 background-color: #4338CA;}
 
@@ -151,7 +136,7 @@ background-color: #4338CA;}
 }
 
 .about-image img {
-    width: 300px;
+    width: 400px;
     height: 380px;
     border: 2px solid whitesmoke;
     border-radius: 20px;
@@ -182,12 +167,11 @@ background-color: #4338CA;}
     flex-direction: column;
     justify-content: center;
     gap: 10px;
-    min-height: 150px;
+    height: 150px;
     padding: 20px;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 15px;
-    backdrop-filter: blur(8px);
     box-shadow: 0 4px 12px rgba(126, 34, 206, 0.2);
     transition: transform 0.7s ease, background-color 0.7s ease,
         box-shadow 0.7s ease;
@@ -333,9 +317,6 @@ background-color: #4338CA;}
     border-radius: 8px;
 }
 
-
-
-
 .contact-form button {
     padding: 12px;
     color: white;
@@ -363,7 +344,6 @@ footer:hover {
 background-color: #4338CA;
 }
 
-
 @media (max-width: 768px) {
     .home {
         flex-direction: column;
@@ -372,19 +352,16 @@ background-color: #4338CA;
     .navbar-nav {
         flex-direction: column;
         align-items: center;
-        position: static;
     }
 
     .projects-grid {
         grid-template-columns: 1fr;
-                margin-right: 20px;
-        justify-content: center;
+        margin-right: 20px;
     }
 
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
         margin-right: 40px;
-        justify-content: center;
     }
 
     .contact-content {
@@ -414,6 +391,7 @@ background-color: #4338CA;
         height: 360px;
     }
 }
+
 @media (min-width: 769px) and (max-width: 1024px) {
     .home {
         gap: 20px;
@@ -447,4 +425,3 @@ background-color: #4338CA;
         height: 320px;
     }
 }
-
