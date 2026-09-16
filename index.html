@@ -18,23 +18,21 @@
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand lh-1" href="#">
-                    M<br>
-                    Y
-                </a>
-
+                <strong class="name "> M<br>
+                    Y</strong>
                 <div class="navbar-nav d-flex justify-content-end w-100">
-                    <a class="nav-link active" href="#">Home</a>
-                    <a class="nav-link" href="#">Skills</a>
-                    <a class="nav-link" href="#">Projects</a>
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="#home">Home</a>
+                    <a class="nav-link" href="#about">About Me</a>
+                    <a class="nav-link" href="#skills">Skills</a>
+                    <a class="nav-link" href="#projects">Projects</a>
+                    <a class="nav-link" href="#contact">Contact</a>
                 </div>
             </div>
         </nav>
     </header>
 
     <main>
-    <section class="home">
+    <section class="home" id="home">
         <div class="home-content">
             <strong>FULL-STACK DEVELOPER </strong>
 
@@ -61,7 +59,35 @@
         </div>
     </section>
 
-    <section class="skills">
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2>About Me</h2>
+
+            <p>
+                I am a Software Engineering student at Al-Balqa Applied
+                University and a recipient of the Best Project Award at my
+                university. This achievement strengthened my confidence and
+                motivated me to keep improving as a developer.
+            </p>
+
+            <p>
+                I enjoy turning ideas into complete, integrated web
+                applications with a strong focus on delivering the best user
+                experience. My logical and analytical thinking helps me solve
+                problems carefully and build practical, user-friendly
+                solutions.
+            </p>
+        </div>
+
+        <div class="about-image">
+            <img
+                src="image/personal.jpg"
+                alt="Portrait of Mohammed Yaseen"
+            >
+        </div>
+    </section>
+
+    <section class="skills" id="skills">
         <h2>My Skills</h2>
 
         <div class="skills-grid">
@@ -119,10 +145,15 @@
                 <h3>UI/UX</h3>
                 <p>Focused on creating clear and user-friendly interfaces.</p>
             </div>
+
+            <div class="skill-card">
+                <h3>Git GitHub</h3>
+                <p>Used to track code changes, manage project versions, and share repositories online.</p>
+            </div>
         </div>
     </section>
 
-    <section class="projects">
+    <section class="projects" id="projects">
         <h2>My Projects</h2>
 
         <div class="projects-grid">
@@ -179,58 +210,60 @@
         </div>
     </section>
 
-   <section class="contact">
+   <section class="contact" id="contact">
     <h2>Contact Me</h2>
 
-    <div class="contact-links">
-        <div class="contact-card">
-            <h3>Email</h3>
+    <div class="contact-content">
+        <div class="contact-links">
+            <div class="contact-card">
+                <h3>Email</h3>
 
-            <a
-                href="mailto:mohyaseen254@gmail.com"
-                class="contact-link"
-            >
-                mohyaseen254@gmail.com
-            </a>
+                <a
+                    href="mailto:mohyaseen254@gmail.com"
+                    class="contact-link"
+                >
+                    mohyaseen254@gmail.com
+                </a>
+            </div>
+
+            <div class="contact-card">
+                <h3>GitHub</h3>
+
+                <a
+                    href="https://github.com/mohyaseen-2001"
+                    class="contact-link"
+                    target="_blank"
+                >
+                    Visit GitHub
+                </a>
+            </div>
+
+            <div class="contact-card">
+                <h3>LinkedIn</h3>
+
+                <a
+                    href="https://www.linkedin.com/in/mohammad-yasin-653bb1289/"
+                    class="contact-link"
+                    target="_blank"
+                >
+                    Visit LinkedIn
+                </a>
+            </div>
         </div>
 
-        <div class="contact-card">
-            <h3>GitHub</h3>
+        <form class="contact-form" action="#">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
 
-            <a
-                href="https://github.com/mohyaseen-2001"
-                class="contact-link"
-                target="_blank"
-            >
-                Visit GitHub
-            </a>
-        </div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your-email@example.com" required>
 
-        <div class="contact-card">
-            <h3>LinkedIn</h3>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Write your message" required></textarea>
 
-            <a
-                href="https://www.linkedin.com/in/mohammad-yasin-653bb1289/"
-                class="contact-link"
-                target="_blank"
-            >
-                Visit LinkedIn
-            </a>
-        </div>
+            <button type="submit">Send Message</button>
+        </form>
     </div>
-
-    <form class="contact-form" action="#">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your name" required>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="your-email@example.com" required>
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" placeholder="Write your message" required></textarea>
-
-        <button type="submit">Send Message</button>
-    </form>
 </section>
     </main>
     <footer class="text-white text-center p-4">
