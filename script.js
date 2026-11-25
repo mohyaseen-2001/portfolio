@@ -181,24 +181,5 @@
             });
         });
 
-        const gh = "https://" + "://github.com";
-        document.querySelectorAll(".work-card").forEach(card => {
-            const repo = card.getAttribute("data-repo");
-            const live = card.getAttribute("data-live");
-            if (live === "edutrack") {
-                const liveBtn = card.querySelector(".live-btn");
-                const codeBtn = card.querySelector(".code-btn");
-                if (liveBtn) liveBtn.href = "https://" + "hadeelabdal-majeed.github.io/EduTrack/";
-                if (codeBtn) codeBtn.href = gh + repo;
-            } else {
-                const btn = card.querySelector(".circle-arrow-btn");
-                if (btn && repo) btn.href = gh + repo;
             }
-        });
-
-        const ghUser = gh + "mohyaseen-2001";
-        const liUrl = "https://" + "://linkedin.com";
-        ["aboutGhLink", "footerGh"].forEach(id => { const el = document.getElementById(id); if (el) el.href = ghUser; });
-        ["aboutLiLink", "footerLi"].forEach(id => { const el = document.getElementById(id); if (el) el.href = liUrl; });
-    }
 })();
