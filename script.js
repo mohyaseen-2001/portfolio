@@ -1,133 +1,171 @@
-(function bootstrapPortfolio() {
-    const cdnBase = "https://" + "cdn.jsdelivr.net/npm/";
+(function () {
+    const cdn = "https://" + "cdn.jsdelivr.net/npm/";
 
-    const faLink = document.createElement("link");
-    faLink.rel = "stylesheet";
-    faLink.href = cdnBase + "@fortawesome/fontawesome-free@6.5.1/css/all.min.css";
-    document.head.appendChild(faLink);
+    const fa = document.createElement("link");
+    fa.rel = "stylesheet";
+    fa.href = cdn + "@fortawesome/fontawesome-free@6.5.1/css/all.min.css";
+    document.head.appendChild(fa);
 
-    function loadScript(src, callback) {
+    function addJs(url, cb) {
         const s = document.createElement("script");
-        s.src = src;
-        s.onload = callback;
-        s.onerror = callback;
+        s.src = url;
+        s.onload = cb;
+        s.onerror = cb;
         document.body.appendChild(s);
     }
 
-    loadScript(cdnBase + "gsap@3.12.5/dist/gsap.min.js", () => {
-        loadScript(cdnBase + "gsap@3.12.5/dist/ScrollTrigger.min.js", initApp);
+    addJs(cdn + "gsap@3.12.5/dist/gsap.min.js", () => {
+        addJs(cdn + "gsap@3.12.5/dist/ScrollTrigger.min.js", startSite);
     });
 
-    function initApp() {
+    function startSite() {
         const hasGsap = typeof gsap !== "undefined";
-        if (hasGsap && typeof ScrollTrigger !== "undefined") {
-            gsap.registerPlugin(ScrollTrigger);
-        }
+        if (hasGsap && typeof ScrollTrigger !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
-        const introOverlay = document.getElementById("introOverlay");
+        const overlay = document.getElementById("introOverlay");
         const skipBtn = document.getElementById("skipIntro");
-        const introContact = document.getElementById("introSkipContact");
+        const wordEl = document.getElementById("introWord");
+        const roleEl = document.getElementById("introRole");
+        const dotEl = document.getElementById("introDot");
         const canvas = document.getElementById("particleCanvas");
 
-        if (canvas) {
+        let dots = [];
+        let animId;
+                function makePortrait() {
+            if (!canvas) return;
             const ctx = canvas.getContext("2d");
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            const particles = Array.from({ length: 110 }, () => ({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                r: Math.random() * 2.2 + 0.8,
-                dx: (Math.random() - 0.5) * 1.1,
-                dy: (Math.random() - 0.5) * 1.1
-            }));
 
-            function animateParticles() {
-                if (!introOverlay || introOverlay.style.display === "none") return;
+            const img = new Image();
+            img.src = "image/personal.jpg";
+            img.onload = () => {
+                try {
+                    const size = 220;
+                    const off = document.createElement("canvas");
+                    off.width = size;
+                    off.height = size;
+                    const octx = off.getContext("2d");
+
+                    octx.filter = "grayscale(100%) contrast(140%) brightness(105%)";
+                    octx.drawImage(img, 0, 0, size, size);
+                    const data = octx.getImageData(0, 0, size, size).data;
+
+                    const scale = 1.2;
+                    const ox = (canvas.width - size * scale) / 2;
+                    const oy = (canvas.height - size * scale) / 2 - 75;
+
+                    for (let y = 0; y < size; y += 2) {
+                        for (let x = 0; x < size; x += 2) {
+                            const dx = (x - size * 0.49) / (size * 0.43);
+                            const dy = (y - size * 0.45) / (size * 0.45);
+                            if (dx * dx + dy * dy > 1) continue;
+
+                            const b = data[(y * size + x) * 4];
+                            // Skip bright room background, keep hair, face, and shirt shades
+                            if (b < 238) {
+                                const shade = Math.min(255, Math.max(65, b + 25));
+                                dots.push({
+                                    x: Math.random() * canvas.width,
+                                    y: Math.random() * canvas.height,
+                                    tx: ox + x * scale,
+                                    ty: oy + y * scale,
+                                    r: 1.7,
+                                    c: `rgb(${shade}, ${shade}, ${shade + 12})`
+                                });
+                            }
+                        }
+                    }
+                } catch (e) {
+                    dots = Array.from({ length: 120 }, () => ({
+                        x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+                        tx: Math.random() * canvas.width, ty: Math.random() * canvas.height,
+                        r: 2, c: "#cbd5e1"
+                    }));
+                }
+            };
+
+            function draw() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = "#a855f7";
-                particles.forEach(p => {
-                    p.x += p.dx;
-                    p.y += p.dy;
-                    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-                    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    ctx.fill();
+                dots.forEach(p => {
+                    p.x += (p.tx - p.x) * 0.12;
+                    p.y += (p.ty - p.y) * 0.12;
+                    ctx.fillStyle = p.c;
+                    ctx.fillRect(p.x, p.y, p.r, p.r);
                 });
-                requestAnimationFrame(animateParticles);
+                animId = requestAnimationFrame(draw);
             }
-            animateParticles();
+            draw();
         }
 
+
         function closeIntro() {
-            if (!introOverlay || introOverlay.dataset.closed === "true") return;
-            introOverlay.dataset.closed = "true";
+            if (!overlay || overlay.dataset.closed === "true") return;
+            overlay.dataset.closed = "true";
+            cancelAnimationFrame(animId);
 
             if (hasGsap) {
-                gsap.to(introOverlay, {
+                gsap.to(overlay, {
                     yPercent: -100,
-                    duration: 0.85,
+                    duration: 0.9,
                     ease: "power4.inOut",
                     onComplete: () => {
-                        introOverlay.style.display = "none";
-                        playHeroReveal();
+                        overlay.style.display = "none";
+                        gsap.fromTo(".hero-reveal", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.85, stagger: 0.14 });
                     }
                 });
             } else {
-                introOverlay.style.transition = "transform 0.8s ease";
-                introOverlay.style.transform = "translateY(-100%)";
-                setTimeout(() => { introOverlay.style.display = "none"; }, 800);
+                overlay.style.display = "none";
             }
         }
 
-        const autoTimer = setTimeout(closeIntro, 2400);
-        if (skipBtn) skipBtn.addEventListener("click", () => { clearTimeout(autoTimer); closeIntro(); });
-        if (introContact) introContact.addEventListener("click", () => { clearTimeout(autoTimer); closeIntro(); });
-
-        function playHeroReveal() {
-            if (!hasGsap) return;
-            gsap.fromTo(".hero-reveal",
-                { y: 40, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.85, stagger: 0.14, ease: "power3.out" }
-            );
+        if (hasGsap) {
+            const tl = gsap.timeline({ onComplete: () => setTimeout(closeIntro, 1800) });
+            tl.fromTo(dotEl, { scale: 0 }, { scale: 1.5, duration: 0.45, ease: "back.out(2)" })
+              .to(dotEl, { scale: 0, opacity: 0, duration: 0.25 })
+              .to(wordEl, { opacity: 1, y: -10, duration: 0.55, ease: "power3.out" })
+              .to(wordEl, {
+                  opacity: 0, duration: 0.3, delay: 0.5,
+                  onComplete: () => {
+                      wordEl.textContent = "PORTFOLIO";
+                      makePortrait();
+                  }
+              })
+              .to(wordEl, { opacity: 1, duration: 0.5 })
+              .to(roleEl, { opacity: 1, duration: 0.4 }, "-=0.2");
+        } else {
+            setTimeout(closeIntro, 2000);
         }
 
+        if (skipBtn) skipBtn.addEventListener("click", closeIntro);
+
+        // Scroll Animations
         if (hasGsap && typeof ScrollTrigger !== "undefined") {
-            gsap.to("#stLine1", {
-                xPercent: -12,
-                scrollTrigger: { trigger: "#statementSec", start: "top bottom", end: "bottom top", scrub: 1 }
-            });
-            gsap.to("#stLine2", {
-                xPercent: 12,
-                scrollTrigger: { trigger: "#statementSec", start: "top bottom", end: "bottom top", scrub: 1 }
-            });
-            gsap.to("#stLine3", {
-                xPercent: -10,
-                scrollTrigger: { trigger: "#statementSec", start: "top bottom", end: "bottom top", scrub: 1 }
-            });
+            gsap.fromTo("#stLine1", { xPercent: 4 }, { xPercent: -4, scrollTrigger: { trigger: "#statementSec", start: "top bottom", end: "bottom top", scrub: 1 } });
+            gsap.fromTo("#stLine2", { xPercent: -4 }, { xPercent: 4, scrollTrigger: { trigger: "#statementSec", start: "top bottom", end: "bottom top", scrub: 1 } });
+            gsap.fromTo("#stLine3", { xPercent: 4 }, { xPercent: -4, scrollTrigger: { trigger: "#statementSec", start: "top bottom", end: "bottom top", scrub: 1 } });
 
             gsap.utils.toArray(".reveal-up").forEach(el => {
-                gsap.fromTo(el,
-                    { y: 40, opacity: 0 },
-                    {
-                        y: 0, opacity: 1, duration: 0.75, ease: "power3.out",
-                        scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none" }
-                    }
-                );
+                gsap.fromTo(el, { y: 40, opacity: 0 }, {
+                    y: 0, opacity: 1, duration: 0.75, ease: "power3.out",
+                    scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none" }
+                });
             });
         }
 
-        const themeToggle = document.getElementById("themeToggle");
-        const themeLabel = document.getElementById("themeLabel");
-        if (themeToggle) {
-            themeToggle.addEventListener("click", () => {
-                const current = document.documentElement.getAttribute("data-theme");
-                const next = current === "dark" ? "light" : "dark";
+        // Theme Toggle (Dark / Light)
+        const themeBtn = document.getElementById("themeToggle");
+        const themeLbl = document.getElementById("themeLabel");
+        if (themeBtn) {
+            themeBtn.addEventListener("click", () => {
+                const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
                 document.documentElement.setAttribute("data-theme", next);
-                themeLabel.textContent = next.toUpperCase();
+                themeLbl.textContent = next.toUpperCase();
             });
         }
-        const translations = {
+
+        // Language Toggle (EN / AR)
+        const dict = {
             en: {
                 nav_home: "Home", nav_about: "About", nav_skills: "Expertise", nav_projects: "Projects", nav_contact: "Contact", nav_talk: "• LET'S TALK",
                 hero_hi: "HI, I'M MOHAMMED", hero_t1: "SOFTWARE", hero_t2: "& CREATOR.",
@@ -173,13 +211,11 @@
                 const lang = opt.getAttribute("data-lang");
                 document.documentElement.setAttribute("lang", lang);
                 document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
-
                 document.querySelectorAll("[data-i18n]").forEach(el => {
                     const key = el.getAttribute("data-i18n");
-                    if (translations[lang][key]) el.textContent = translations[lang][key];
+                    if (dict[lang][key]) el.textContent = dict[lang][key];
                 });
             });
         });
-
-            }
+    }
 })();
