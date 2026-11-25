@@ -1,271 +1,356 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>My Portfolio</title>
-
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
+    <title>Mohammed Yaseen | Software Engineer & Creator</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cloudflare.com">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-                <strong class="name "> M<br>
-                    Y</strong>
-                <div class="navbar-nav d-flex justify-content-end w-100">
-                    <a class="nav-link" href="#home">Home</a>
-                    <a class="nav-link" href="#about">About Me</a>
-                    <a class="nav-link" href="#skills">Skills</a>
-                    <a class="nav-link" href="#projects">Projects</a>
-                    <a class="nav-link" href="#contact">Contact</a>
+
+<!-- 01 / CINEMATIC INTRO PRELOADER -->
+<div class="intro-overlay" id="introOverlay">
+    <canvas id="particleCanvas"></canvas>
+    <div class="intro-content">
+        <h1 class="intro-title" id="introName">MOHAMMED</h1>
+        <p class="intro-sub">Software Engineer • Full-Stack Developer</p>
+        <a href="#contact" class="intro-contact-pill" id="introSkipContact">• Contact</a>
+    </div>
+    <button class="skip-intro-btn" id="skipIntro">SKIP INTRO <i class="fa-solid fa-arrow-right ms-1"></i></button>
+</div>
+
+<!-- NAVBAR -->
+<header class="site-header">
+    <div class="nav-container">
+        <a href="#home" class="brand-box">
+            <span class="brand-monogram">M</span>
+            <div class="brand-info">
+                <small>MOHAMMED</small>
+                <strong>YASEEN</strong>
+            </div>
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="#home" data-i18n="nav_home">Home</a>
+            <a href="#about" data-i18n="nav_about">About</a>
+            <a href="#skills" data-i18n="nav_skills">Expertise</a>
+            <a href="#projects" data-i18n="nav_projects">Projects</a>
+            <a href="#contact" data-i18n="nav_contact">Contact</a>
+        </nav>
+
+        <div class="nav-controls">
+            <button class="pill-toggle" id="themeToggle" title="Switch Theme">
+                <span class="dot-indicator"></span>
+                <span id="themeLabel">DARK</span>
+            </button>
+            <a href="#contact" class="pill-cta" data-i18n="nav_talk">• LET'S TALK</a>
+            <div class="lang-switch" id="langSwitch">
+                <span class="lang-opt active" data-lang="en">EN</span>
+                <span class="lang-opt" data-lang="ar">عربي</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- 02 / HERO SECTION -->
+    <section class="hero-sec" id="home">
+        <div class="hero-bg-grid"></div>
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-left">
+                    <div class="eyebrow-tag hero-reveal" data-i18n="hero_hi">HI, I'M MOHAMMED</div>
+                    <h1 class="mega-title hero-reveal">
+                        <span data-i18n="hero_t1">SOFTWARE</span><br>
+                        <span class="accent-star">ENGINEER <span class="star">*</span></span><br>
+                        <span data-i18n="hero_t2">& CREATOR.</span>
+                    </h1>
+                    <p class="hero-lead hero-reveal" data-i18n="hero_desc">
+                        I build scalable web applications and RESTful APIs using <strong>Laravel</strong>, <strong>PHP</strong>, and <strong>React</strong>. Best Project Award recipient focused on clean architecture and great user experiences.
+                    </p>
+                    <div class="hero-cta-row hero-reveal">
+                        <a href="#projects" class="btn-gold" data-i18n="hero_btn1">VIEW PROJECTS <i class="fa-solid fa-arrow-up-right-from-square ms-2"></i></a>
+                        <a href="#about" class="btn-ghost" data-i18n="hero_btn2">ABOUT ME <i class="fa-solid fa-arrow-down ms-2"></i></a>
+                    </div>
+                </div>
+                <div class="hero-right hero-reveal">
+                    <div class="code-window">
+                        <div class="window-dots"><span></span><span></span><span></span><small>FlightController.php — Laravel 12</small></div>
+                        <pre><code><span class="c-purple">public function</span> <span class="c-gold">index</span>(Request $request)
+{
+    $airlineId = auth()->user()->airlineAdmin->airline_id;
+
+    <span class="c-purple">return</span> Flight::where(<span class="c-green">'airline_id'</span>, $airlineId)
+        ->with([<span class="c-green">'originAirport'</span>, <span class="c-green">'flightClasses'</span>])
+        ->latest(<span class="c-green">'departure_at'</span>)
+        ->paginate(10);
+}</code></pre>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-
-    <main>
-    <section class="home" id="home">
-        <div class="home-content">
-            <strong>FULL-STACK DEVELOPER </strong>
-
-            <h1>Hi, I'm Mohammed Yaseen.</h1>
-
-            <p>
-                
-    I'm a Software Engineering student passionate about building modern,
-    user-friendly web applications. I am developing my skills in React
-    for front-end development and Laravel for back-end development, while
-    learning how to create responsive, practical, and well-designed
-    digital experiences.
-            </p>
-
-<a href="#projects" class="home-btn-link">View My Projects</a>        </div>
-
-        <div class="home-image">
-            <img
-                class="home-picture"
-                src="image/Work time-amico (1).png"
-                alt="Developer working with a laptop"
-            >
-        </div>
-    </section>
-
-    <section class="about" id="about">
-        <div class="about-content">
-            <h2>About Me</h2>
-
-            <p>
-                I am a Software Engineering student at Al-Balqa Applied
-                University and a recipient of the Best Project Award at my
-                university. This achievement strengthened my confidence and
-                motivated me to keep improving as a developer.
-            </p>
-
-            <p>
-                I enjoy turning ideas into complete, integrated web
-                applications with a strong focus on delivering the best user
-                experience. My logical and analytical thinking helps me solve
-                problems carefully and build practical, user-friendly
-                solutions.
-            </p>
-        </div>
-
-        <div class="about-image">
-            <img
-                src="image/personal.jpg"
-                alt="Portrait of Mohammed Yaseen"
-            >
-        </div>
-    </section>
-
-    <section class="skills" id="skills">
-        <h2>My Skills</h2>
-
-        <div class="skills-grid">
-            <div class="skill-card">
-                <h3>C++</h3>
-                <p>Used for learning programming fundamentals and problem solving.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>PHP</h3>
-                <p>Used to build dynamic web applications on the server side.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>JavaScript</h3>
-                <p>Used to add interactive features to websites.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>HTML</h3>
-                <p>Used to create the structure of web pages.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>CSS</h3>
-                <p>Used to style pages and create responsive layouts.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>Bootstrap</h3>
-                <p>Used to build responsive interfaces quickly.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>React</h3>
-                <p>Used to build modern and reusable user interfaces.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>Laravel</h3>
-                <p>Used to develop secure back-end web applications.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>REST APIs</h3>
-                <p>Used to connect front-end applications with back-end services.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>MySQL</h3>
-                <p>Used to store and manage application data.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>UI/UX</h3>
-                <p>Focused on creating clear and user-friendly interfaces.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>Git GitHub</h3>
-                <p>Used to track code changes, manage project versions, and share repositories online.</p>
+            <div class="hero-bottom-bar">
+                <span>• FULL-STACK LARAVEL • REACT & REST APIS • AMMAN, JO</span>
+                <span>PORTFOLIO — 2026</span>
             </div>
         </div>
     </section>
 
-    <section class="projects" id="projects">
-        <h2>My Projects</h2>
-
-        <div class="projects-grid">
-            <div class="project-card">
-                <img
-                    class="project-image"
-                    src="image/betariq.png"
-                    alt="BeTareeqak project preview"
-                >
-
-                <h3>BeTareeqak</h3>
-
-                <p>
-                    A travel journey planning web application built with
-                    React and Node.js.
-                </p>
-
-                <a href="#" class="project-link">View Project</a>
-            </div>
-
-            <div class="project-card">
-                <img
-                    class="project-image"
-                    src="image/recipe-detail-preview.png"
-                    alt="Recipe detail page preview"
-                >
-
-                <h3>Recipe Detail Page</h3>
-
-                <p>
-                    A responsive food blog recipe page with a recipe layout,
-                    ingredients checklist, author section, and footer.
-                </p>
-
-                <a href="#" class="project-link">View Project</a>
-            </div>
-
-            <div class="project-card">
-          <img
-    class="project-image"
-    src="image/my pro.png"
-    alt="Portfolio website preview"
->
-
-                <h3>Portfolio Website</h3>
-
-                <p>
-                    A responsive personal portfolio website built with
-                    HTML, CSS, and Bootstrap.
-                </p>
-
-                <a href="#" class="project-link">View Project</a>
+    <!-- 03 / ABOUT SECTION -->
+    <section class="about-sec" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-photo-box reveal-up">
+                    <img src="image/personal.jpg" alt="Mohammed Yaseen">
+                </div>
+                <div class="about-text-box reveal-up">
+                    <span class="sec-kicker" data-i18n="about_kicker">ABOUT ME</span>
+                    <h2 class="sec-title" data-i18n="about_title">A little about me.</h2>
+                    <p data-i18n="about_p1">
+                        I'm <strong>Mohammed Yaseen</strong>, a Software Engineering graduate from <strong>Al-Balqa Applied University</strong> and a proud recipient of the <strong>Best Project Award</strong> at my university.
+                    </p>
+                    <p data-i18n="about_p2">
+                        I specialize in architecting secure multi-role systems with Laravel and MySQL, alongside building responsive, interactive interfaces with React and JavaScript.
+                    </p>
+                    <div class="about-actions">
+                        <a href="https://github.com" target="_blank" id="aboutGhLink" class="btn-ghost-sm">VIEW GITHUB <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+                        <a href="https://linkedin.com" target="_blank" id="aboutLiLink" class="btn-ghost-sm">LINKEDIN <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-   <section class="contact" id="contact">
-    <h2>Contact Me</h2>
-
-    <div class="contact-content">
-        <div class="contact-links">
-            <div class="contact-card">
-                <h3>Email</h3>
-
-                <a
-                    href="mailto:mohyaseen254@gmail.com"
-                    class="contact-link"
-                >
-                    mohyaseen254@gmail.com
-                </a>
+    <!-- 04 / HORIZONTAL SCROLL MARQUEE STATEMENT -->
+    <section class="statement-sec" id="statementSec">
+        <div class="statement-track">
+            <div class="st-line st-left" id="stLine1">I BUILD <span>FRONT.</span></div>
+            <div class="st-line st-right" id="stLine2">I BUILD <span>BACK.</span></div>
+            <div class="st-line st-left" id="stLine3">I TEST <span>EVERYTHING.</span></div>
+        </div>
+    </section>
+    <!-- 05 / EXPERTISE & SKILLS -->
+    <section class="skills-sec" id="skills">
+        <div class="container">
+            <div class="sec-head-flex reveal-up">
+                <h2 class="sec-mega-heading" data-i18n="skills_title">My Skills.</h2>
+                <p class="sec-side-note" data-i18n="skills_note">Frontend, backend, databases, and RESTful API architecture.</p>
             </div>
 
-            <div class="contact-card">
-                <h3>GitHub</h3>
+            <div class="bento-4-grid">
+                <div class="bento-card reveal-up">
+                    <span class="card-num">01 —</span>
+                    <div class="bento-icon"><i class="fa-solid fa-code"></i></div>
+                    <h3 data-i18n="sk1_t">Frontend Development</h3>
+                    <p data-i18n="sk1_d">I build responsive, interactive interfaces using React, JavaScript ES6, HTML5, CSS3, and Bootstrap.</p>
+                    <div class="mini-icons">
+                        <i class="fa-brands fa-react" title="React"></i>
+                        <i class="fa-brands fa-js" title="JavaScript"></i>
+                        <i class="fa-brands fa-bootstrap" title="Bootstrap"></i>
+                        <i class="fa-brands fa-html5" title="HTML5"></i>
+                    </div>
+                </div>
 
-                <a
-                    href="https://github.com/mohyaseen-2001"
-                    class="contact-link"
-                    target="_blank"
-                >
-                    Visit GitHub
-                </a>
-            </div>
+                <div class="bento-card reveal-up">
+                    <span class="card-num">02 —</span>
+                    <div class="bento-icon"><i class="fa-solid fa-server"></i></div>
+                    <h3 data-i18n="sk2_t">Backend Engineering</h3>
+                    <p data-i18n="sk2_d">I architect secure MVC systems and REST APIs with Laravel 12, PHP OOP, Sanctum, and Middleware.</p>
+                    <div class="mini-icons">
+                        <i class="fa-brands fa-laravel" title="Laravel"></i>
+                        <i class="fa-brands fa-php" title="PHP"></i>
+                        <i class="fa-solid fa-key" title="Auth & Sanctum"></i>
+                    </div>
+                </div>
 
-            <div class="contact-card">
-                <h3>LinkedIn</h3>
+                <div class="bento-card reveal-up">
+                    <span class="card-num">03 —</span>
+                    <div class="bento-icon"><i class="fa-solid fa-database"></i></div>
+                    <h3 data-i18n="sk3_t">Database Systems</h3>
+                    <p data-i18n="sk3_d">I design normalized relational schemas, migrations, Eloquent relationships, and optimized MySQL queries.</p>
+                    <div class="mini-icons">
+                        <i class="fa-solid fa-database" title="MySQL"></i>
+                        <i class="fa-solid fa-diagram-project" title="ERD & Relations"></i>
+                    </div>
+                </div>
 
-                <a
-                    href="https://www.linkedin.com/in/mohammad-yasin-653bb1289/"
-                    class="contact-link"
-                    target="_blank"
-                >
-                    Visit LinkedIn
-                </a>
+                <div class="bento-card reveal-up">
+                    <span class="card-num">04 —</span>
+                    <div class="bento-icon"><i class="fa-solid fa-plug-circle-bolt"></i></div>
+                    <h3 data-i18n="sk4_t">Integrations & Tools</h3>
+                    <p data-i18n="sk4_d">I integrate payment gateways (Stripe), AI APIs (Gemini), Git workflows, and API testing with Postman.</p>
+                    <div class="mini-icons">
+                        <i class="fa-brands fa-git-alt" title="Git"></i>
+                        <i class="fa-brands fa-github" title="GitHub"></i>
+                        <i class="fa-brands fa-stripe-s" title="Stripe"></i>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <form class="contact-form" action="#">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Your name" required>
+    <!-- 06 / FEATURED PROJECTS -->
+    <section class="projects-sec" id="projects">
+        <div class="container">
+            <div class="sec-head-flex reveal-up">
+                <h2 class="sec-mega-heading" data-i18n="proj_title">My Projects.</h2>
+                <p class="sec-side-note" data-i18n="proj_note">Selected full-stack systems and interactive applications.</p>
+            </div>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="your-email@example.com" required>
+            <div class="projects-2col-grid">
+                <article class="work-card reveal-up" data-repo="alkayyalirahaf/Yalla-Teer">
+                    <div class="work-visual vis-violet">
+                        <span class="work-tag">// SELECTED WORK — 01</span>
+                        <i class="fa-solid fa-plane-departure work-center-icon"></i>
+                        <h4>YALLA TEER</h4>
+                        <small>LARAVEL 12 • MYSQL • STRIPE • GEMINI AI</small>
+                    </div>
+                    <div class="work-footer">
+                        <div>
+                            <h3>Yalla Teer — Flight Booking Platform</h3>
+                            <p>Multi-role airline reservation platform with tenant data scoping and automated seat inventory.</p>
+                        </div>
+                        <a href="#" target="_blank" class="circle-arrow-btn" aria-label="Open Repository"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </article>
 
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Write your message" required></textarea>
+                <article class="work-card reveal-up" data-repo="amro-abdelqader-03/phpGroupProject">
+                    <div class="work-visual vis-cyan">
+                        <span class="work-tag">// SELECTED WORK — 02</span>
+                        <i class="fa-solid fa-bag-shopping work-center-icon"></i>
+                        <h4>ÉLAN BRIDAL</h4>
+                        <small>PHP OOP • MYSQL / PDO • BOOTSTRAP 5 • CHART.JS</small>
+                    </div>
+                    <div class="work-footer">
+                        <div>
+                            <h3>Élan Bridal — E-Commerce System</h3>
+                            <p>Full wedding store with shopping cart, checkout, reviews, and an analytics admin dashboard.</p>
+                        </div>
+                        <a href="#" target="_blank" class="circle-arrow-btn" aria-label="Open Repository"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </article>
 
-            <button type="submit">Send Message</button>
-        </form>
+                <article class="work-card reveal-up" data-repo="HadeelAbdAl-majeed/EduTrack" data-live="edutrack">
+                    <div class="work-visual vis-indigo">
+                        <span class="work-tag">// SELECTED WORK — 03</span>
+                        <i class="fa-solid fa-graduation-cap work-center-icon"></i>
+                        <h4>EDUTRACK</h4>
+                        <small>JAVASCRIPT ES6 • REST API • CHART.JS • DARK MODE</small>
+                    </div>
+                    <div class="work-footer">
+                        <div>
+                            <h3>EduTrack — Instructor Portal</h3>
+                            <p>Classroom portal to manage students, attendance, exams, and grades with live analytics.</p>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <a href="#" target="_blank" class="circle-arrow-btn live-btn" title="Live Demo"><i class="fa-solid fa-globe"></i></a>
+                            <a href="#" target="_blank" class="circle-arrow-btn code-btn" title="Source Code"><i class="fa-brands fa-github"></i></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="work-card reveal-up" data-repo="mohyaseen-2001/book-system">
+                    <div class="work-visual vis-magenta">
+                        <span class="work-tag">// SELECTED WORK — 04</span>
+                        <i class="fa-solid fa-building-user work-center-icon"></i>
+                        <h4>COWORKSPACE</h4>
+                        <small>PHP • MYSQL • ROLE-BASED AUTH</small>
+                    </div>
+                    <div class="work-footer">
+                        <div>
+                            <h3>CoworkSpace Reservation System</h3>
+                            <p>Workspace booking platform with real-time slot capacity checks and admin approval dashboard.</p>
+                        </div>
+                        <a href="#" target="_blank" class="circle-arrow-btn" aria-label="Open Repository"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </article>
+
+                <article class="work-card reveal-up" data-repo="mohyaseen-2001/simple-blog-laravel">
+                    <div class="work-visual vis-teal">
+                        <span class="work-tag">// SELECTED WORK — 05</span>
+                        <i class="fa-solid fa-pen-nib work-center-icon"></i>
+                        <h4>LARAVEL BLOG</h4>
+                        <small>LARAVEL • ELOQUENT ORM • MIDDLEWARE</small>
+                    </div>
+                    <div class="work-footer">
+                        <div>
+                            <h3>Laravel Blog & Auth System</h3>
+                            <p>Secure CRUD publishing platform with custom authentication, middleware, and Eloquent relations.</p>
+                        </div>
+                        <a href="#" target="_blank" class="circle-arrow-btn" aria-label="Open Repository"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </article>
+
+                <article class="work-card reveal-up" data-repo="mohyaseen-2001">
+                    <div class="work-visual vis-img">
+                        <span class="work-tag">// SELECTED WORK — 06</span>
+                        <img src="image/betariq.png" alt="BeTareeqak">
+                    </div>
+                    <div class="work-footer">
+                        <div>
+                            <h3>BeTareeqak — Travel Planner</h3>
+                            <p>Modern travel journey planning application built with React and Node.js.</p>
+                        </div>
+                        <a href="#" target="_blank" class="circle-arrow-btn" aria-label="Open GitHub"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-sec" id="contact">
+        <div class="container">
+            <div class="contact-split">
+                <form class="contact-glass-form reveal-up" name="contact" method="POST" data-netlify="true">
+                    <span class="form-badge" data-i18n="form_badge">SEND A MESSAGE</span>
+                    <div class="field-group">
+                        <label for="name" data-i18n="form_name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Mohammed..." required>
+                    </div>
+                    <div class="field-group">
+                        <label for="email" data-i18n="form_email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="field-group">
+                        <label for="message" data-i18n="form_msg">Message</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Tell me about your project..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit-neon" data-i18n="form_btn">SEND MESSAGE <i class="fa-solid fa-paper-plane ms-2"></i></button>
+                </form>
+
+                <div class="contact-pitch reveal-up">
+                    <h2 class="pitch-title">
+                        <span data-i18n="pitch_1">Got an idea?</span><br>
+                        <span class="pitch-outline" data-i18n="pitch_2">Let's build it.</span>
+                    </h2>
+                    <p class="pitch-desc" data-i18n="pitch_desc">
+                        Whether you need a scalable Laravel backend, a REST API, or a modern full-stack web application—feel free to reach out.
+                    </p>
+                    <div class="social-pills">
+                        <a href="mailto:mohyaseen254@gmail.com" class="s-pill"><i class="fa-solid fa-envelope"></i> EMAIL</a>
+                        <a href="#" target="_blank" id="footerGh" class="s-pill"><i class="fa-brands fa-github"></i> GITHUB</a>
+                        <a href="#" target="_blank" id="footerLi" class="s-pill"><i class="fa-brands fa-linkedin"></i> LINKEDIN</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="cinema-footer">
+    <div class="container footer-flex">
+        <div>
+            <small>DESIGNED & BUILT BY</small>
+            <h4>MOHAMMED YASEEN</h4>
+        </div>
+        <p class="mb-0">© 2026 Mohammed Yaseen. All rights reserved.</p>
     </div>
-</section>
-    </main>
-    <footer class="text-white text-center p-4">
-        © 2026 Mohammed Yaseen. All rights reserved.
-    </footer>
+</footer>
+
+
+<script src="script.js"></script>
+
 </body>
 </html>
